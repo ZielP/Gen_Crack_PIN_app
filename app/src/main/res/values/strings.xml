@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CrackThePIN</string>
+    <string name="insert_your_pin_text">Insert your PIN</string>
+    <string name="your_pin_editText">Your PIN</string>
+    <string name="generate_button">Generate</string>
+    <string name="crack_button">Crack</string>
+    <string name="pin_text">PIN</string>
+    <string name="save_button">Save</string>
+    <string name="copy_to_button">Copy to</string>
 </resources>
