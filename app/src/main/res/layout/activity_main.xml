@@ -17,21 +17,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#2823C1"
-            android:orientation="vertical"            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/insert_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:padding="10dp"
                 android:text="@string/insert_your_pin_text"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="25sp"
-                android:padding="10dp"/>
+                android:textSize="25sp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/editTextGivenPin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
@@ -40,7 +40,7 @@
                 android:ems="10"
                 android:inputType="textAutoComplete"
                 android:text="@string/your_pin_editText"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:onClick="onGenerateButtonClick"
                 android:text="@string/generate_button"
                 app:backgroundTint="#B32A61" />
 
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:onClick="onCrackButtonClick"
                 android:text="@string/crack_button"
                 app:backgroundTint="#B32A61" />
 
@@ -74,23 +76,23 @@
 
 
         <LinearLayout
+            android:id="@+id/layout_with_PIN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layout_with_PIN"
             android:layout_below="@id/layout_with_buttons"
-            android:orientation="vertical"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pin"
+                android:id="@+id/pinTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:text="@string/pin_text"
                 android:textAlignment="center"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
