@@ -1,8 +1,12 @@
 package com.example.crackthepin;
 
+import static java.security.MessageDigest.getInstance;
+import static java.util.stream.IntStream.range;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 
 public class Md5Hash {
     public static String getMd5(String message) {

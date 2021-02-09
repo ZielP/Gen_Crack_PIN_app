@@ -2,11 +2,15 @@ package com.example.crackthepin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,27 +33,16 @@ public class MainActivity extends AppCompatActivity {
         pinInput = (EditText) findViewById(R.id.editTextGivenPin);
     }
 
-   /* private void runThread() {
-
-        new Thread() {
+    private void crackThread() {
+        final String PIN = pinInput.getText().toString();
+        //new Thread(() -> pinView.setText(Md5Hash.crack(PIN))).start();
+        new Thread(new Runnable() {
+            @Override
             public void run() {
-                final String PIN = pinInput.getText().toString();
-                    try {
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                pinView.setText(Md5Hash.crack(PIN));
-                            }
-                        });
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-        }.start();
-    }*/
+                pinView.setText(Md5Hash.crack(PIN));
+            }
+        }).start();
+    }
 
     public void onGenerateButtonClick(View view) {
         final String PIN = pinInput.getText().toString();
@@ -57,20 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCrackButtonClick(View view) {
-        final String PIN = pinInput.getText().toString();
-        //pinView.setText(Md5Hash.crack(PIN));
-
-        /*runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                pinView.setText(Md5Hash.crack(PIN));
-            }
-
-        });*/
-
-        //pinView.setText("Working on that");
-
-        runThread();
+        crackThread();
     }
 
     public void onSaveButtonClick(View view) {
@@ -78,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCopyButtonClick(View view) {
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("PIN", pinView.getText().toString());
+        clipboardManager.setPrimaryClip(clip);
 
+        Toast.makeText(MainActivity.this, "Copied", Toast.LENGTH_SHORT).show();
     }
 }
