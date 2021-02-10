@@ -109,6 +109,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:text="@string/save_button"
+                android:onClick="onSaveButtonClick"
                 app:backgroundTint="#B32A61" />
 
             <Button
@@ -122,6 +123,12 @@
                 app:backgroundTint="#B32A61" />
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_below="@id/layout_with_buttons_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
