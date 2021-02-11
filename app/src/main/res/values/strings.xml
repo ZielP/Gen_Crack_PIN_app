@@ -7,4 +7,6 @@
     <string name="pin_text">PIN</string>
     <string name="save_button">Save</string>
     <string name="copy_to_button">Copy to clipboard</string>
+    <string name="item_textview_input">Input</string>
+    <string name="item_textview_output">Output</string>
 </resources>

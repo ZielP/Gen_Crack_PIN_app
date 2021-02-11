@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
-    private Context mContext;
+    private final Context mContext;
     private Cursor mCursor;
 
     public PinAdapter(Context context, Cursor cursor) {
@@ -19,7 +19,7 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
         mCursor = cursor;
     }
 
-    public class PinViewHolder extends RecyclerView.ViewHolder {
+    public static class PinViewHolder extends RecyclerView.ViewHolder {
         public TextView outputText;
         public TextView inputText;
 
@@ -47,9 +47,11 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.PinViewHolder> {
 
         String pinInput = mCursor.getString(mCursor.getColumnIndex(PinContract.PinEntry.COLUMN_INPUT));
         String pinOutput = mCursor.getString(mCursor.getColumnIndex(PinContract.PinEntry.COLUMN_OUTPUT));
+        long id = mCursor.getLong(mCursor.getColumnIndex(PinContract.PinEntry._ID));
 
         holder.inputText.setText(pinInput);
         holder.outputText.setText(pinOutput);
+        holder.itemView.setTag(id);
 
     }
 

@@ -1,6 +1,8 @@
 package com.example.crackthepin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,8 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +41,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new PinAdapter(this, getAllItems());
         recyclerView.setAdapter(mAdapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                removeItem((long) viewHolder.itemView.getTag());
+            }
+        }).attachToRecyclerView(recyclerView);
 
         pinView = (TextView) findViewById(R.id.pinTextView);
 
@@ -107,7 +123,13 @@ public class MainActivity extends AppCompatActivity {
         pinInput.getText().clear();
     }
 
-    private Cursor getAllItems(){
+    private void removeItem(long id) {
+        mDatabase.delete(PinContract.PinEntry.TABLE_NAME,
+                PinContract.PinEntry._ID + "=" + id, null);
+        mAdapter.swapCursor(getAllItems());
+    }
+
+    private Cursor getAllItems() {
         return mDatabase.query(
                 PinContract.PinEntry.TABLE_NAME,
                 null,
